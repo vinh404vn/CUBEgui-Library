@@ -29,6 +29,8 @@ MainFrame.Draggable = true
 
 local p = {}
 
+p.MainFrame = MainFrame
+
 function p:CreateFrame(Parent, Name, Pos, Size, Anchor)
     local NewFrame = Instance.new("Frame")
     NewFrame.Name = Name or "Frame"
