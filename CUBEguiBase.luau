@@ -1,6 +1,6 @@
 --[[
-      CUBE UI Library - Classic Style (c00lgui vibe)
-      Không bo góc - Giữ nguyên phong cách cũ
+      CUBE UI Library
+      Feel like C00lkid now?
 ]]--
 
 -- Random ScreenGui Name
