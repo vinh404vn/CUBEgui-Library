@@ -103,7 +103,7 @@ function p:CreateBtn(Parent, Name, Pos, Size, Anchor, Func)
     NewBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     NewBtn.BorderColor3 = Color3.fromRGB(100, 255, 100)
     NewBtn.BorderSizePixel = 2
-    NewBtn.Text = nil
+    NewBtn.Text = Name or "Button"
     NewBtn.TextColor3 = Color3.new(1, 1, 1)
     NewBtn.TextScaled = true
     NewBtn.Font = Enum.Font.Code
@@ -120,6 +120,7 @@ end
 function p:CreateTextBox(Parent, Name, Pos, Size, Anchor, Placeholder, ClearOnFocus)
     local NewTBox = Instance.new("TextBox")
     NewTBox.Name = Name or "TextBox"
+    NewTBox.Text = ""
     NewTBox.Position = Pos or UDim2.new(0.5, 0, 0, 0)
     NewTBox.Size = Size or UDim2.new(0.95, 0, 0, 35)
     NewTBox.AnchorPoint = Anchor or Vector2.new(0.5, 0)
