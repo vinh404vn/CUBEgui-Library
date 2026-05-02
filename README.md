@@ -7,11 +7,12 @@ local CUBEUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh40
 
 
 # Function
-We just only have 5 function and 1 variable
+We just only have 5 function and 2 variable
 ```luau
 local CUBEUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh404vn/CUBEgui-Library/refs/heads/main/CUBEguiBase.luau"))()
 
 CUBEUI.MainFrame -- the MainFrame Instance
+CUBEUI.Screen -- the ScreenUI Instance
 
 CUBEUI:CreateFrame(Parent, Name, Pos, Size, AnchorPoint)
 CUBEUI:CreateBtn(Parent, Name, Pos, Size, AnchorPoint, Func)        -- i alway forgor to change this both func name
