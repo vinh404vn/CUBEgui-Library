@@ -4,7 +4,7 @@
 ]]--
 
 -- Random ScreenGui Name
-local length = 10
+local length = 200
 local t = {}
 for i = 1, length do
     table.insert(t, string.char(math.random(97, 122)))
