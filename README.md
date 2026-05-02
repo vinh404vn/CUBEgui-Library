@@ -14,8 +14,8 @@ local CUBEUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh40
 CUBEUI.MainFrame -- the MainFrame Instance
 
 CUBEUI:CreateFrame(Parent, Name, Pos, Size, AnchorPoint)
-CUBEUI:CreateButton(Parent, Name, Pos, Size, AnchorPoint, Func)
-CUBEUI:CreateTBox(Parent, Name, Pos, Size, AnchorPoint, PlaceHolderText, ClearOnFocus)
+CUBEUI:CreateBtn(Parent, Name, Pos, Size, AnchorPoint, Func)        -- i alway forgor to change this both func name
+CUBEUI:CreateTextBox(Parent, Name, Pos, Size, AnchorPoint, PlaceHolderText, ClearOnFocus)
 CUBEUI:CreateScroll(Parent, Name, Pos, Size, AnchorPoint, AutoList)
 CUBEUI:AddTextLabel(Target, Name, Text, TextSize) -- TextSize must > 10 or the func automatic change TextSize To AutoScaled
 ```
