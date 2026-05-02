@@ -118,7 +118,7 @@ function p:CreateScroll(Parent, Name, Pos, Size, Anchor, AutoList)
 end
 
 -- ==================== TEXT LABEL ==========================
-function p.AddTextLabel(Target, Name, Text, TextSize)
+function p:AddTextLabel(Target, Name, Text, TextSize)
     local TextLabel = Instance.new("TextLabel")
     TextLabel.Name = Name
     TextLabel.Text = Text
