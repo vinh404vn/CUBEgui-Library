@@ -1,7 +1,6 @@
 --[[
-      CUBE UI Library
+      CUBE UI Library v0.29
       Feel like C00lkid now?
-      IHateTheMotherFuckerTitle
 ]]--
 
 -- Random ScreenGui Name
@@ -21,17 +20,16 @@ Screen.IgnoreGuiInset = true
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "CUBEFrame"
 MainFrame.Parent = Screen
-MainFrame.Size = UDim2.new(0.32, 0, 0.45, 0)
+MainFrame.Size = UDim2.new(0.32, 0, 0.48, 0)
 MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)   -- đen đậm kiểu classic
+MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
 MainFrame.BorderColor3 = Color3.fromRGB(100, 255, 100)
 MainFrame.BorderSizePixel = 2
 MainFrame.Active = true
 MainFrame.Draggable = true
 
 local p = {}
-
 p.MainFrame = MainFrame
 p.ScreenGui = Screen
 
@@ -54,8 +52,8 @@ end
 function p:CreateBtn(Parent, Name, Pos, Size, Anchor, Func)
     local NewBtn = Instance.new("TextButton")
     NewBtn.Name = Name or "Button"
-    NewBtn.Position = Pos or UDim2.new(0, 0, 0, 0)
-    NewBtn.Size = Size or UDim2.new(0.95, 0, 0.08, 0)
+    NewBtn.Position = Pos or UDim2.new(0.5, 0, 0, 0)
+    NewBtn.Size = Size or UDim2.new(0.95, 0, 0, 35)
     NewBtn.AnchorPoint = Anchor or Vector2.new(0.5, 0)
     NewBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     NewBtn.BorderColor3 = Color3.fromRGB(100, 255, 100)
@@ -64,9 +62,9 @@ function p:CreateBtn(Parent, Name, Pos, Size, Anchor, Func)
     NewBtn.TextColor3 = Color3.new(1, 1, 1)
     NewBtn.TextScaled = true
     NewBtn.Font = Enum.Font.Code
+    NewBtn.TextXAlignment = Enum.TextXAlignment.Center
+    NewBtn.TextYAlignment = Enum.TextYAlignment.Center
     NewBtn.Parent = Parent
-    NewBtn.TextXAlignment = Enum.TextXAlignement = 2
-    NewBtn.TextYAlignment = Enum.TextYAlignement = 2
     
     if Func then
         NewBtn.MouseButton1Click:Connect(Func)
@@ -79,26 +77,26 @@ end
 function p:CreateTextBox(Parent, Name, Pos, Size, Anchor, Placeholder, ClearOnFocus)
     local NewTBox = Instance.new("TextBox")
     NewTBox.Name = Name or "TextBox"
-    NewTBox.Position = Pos or UDim2.new(0, 0, 0, 0)
-    NewTBox.Size = Size or UDim2.new(0.95, 0, 0.08, 0)
+    NewTBox.Position = Pos or UDim2.new(0.5, 0, 0, 0)
+    NewTBox.Size = Size or UDim2.new(0.95, 0, 0, 35)
     NewTBox.AnchorPoint = Anchor or Vector2.new(0.5, 0)
     NewTBox.PlaceholderText = Placeholder or "Type here..."
     NewTBox.ClearTextOnFocus = ClearOnFocus ~= false
     NewTBox.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     NewTBox.BorderColor3 = Color3.fromRGB(100, 255, 100)
     NewTBox.BorderSizePixel = 2
-    NewTbox.Text = ""
+    NewTBox.Text = ""
     NewTBox.TextColor3 = Color3.new(1, 1, 1)
     NewTBox.PlaceholderColor3 = Color3.fromRGB(140, 140, 140)
     NewTBox.TextScaled = true
     NewTBox.Font = Enum.Font.Code
-    NewTBox.TextXAlignment = Enum.TextXAlignement = 2
-    NewTBox.TextYAlignment = Enum.TextYAlignement = 2
+    NewTBox.TextXAlignment = Enum.TextXAlignment.Center
+    NewTBox.TextYAlignment = Enum.TextYAlignment.Center
     NewTBox.Parent = Parent
     return NewTBox
 end
 
--- ==================== CREATE SCROLLING FRAME ====================
+-- ==================== CREATE SCROLL ====================
 function p:CreateScroll(Parent, Name, Pos, Size, Anchor, AutoList)
     local NewScroll = Instance.new("ScrollingFrame")
     NewScroll.Name = Name or "Scroll"
@@ -127,18 +125,17 @@ end
 -- ==================== TEXT LABEL ==========================
 function p:AddTextLabel(Target, Name, Text, TextSize)
     local TextLabel = Instance.new("TextLabel")
-    TextLabel.Name = Name
-    TextLabel.Text = Text
+    TextLabel.Name = Name or "Label"
+    TextLabel.Size = UDim2.new(1, 0, 0, 30)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Text = Text or ""
+    TextLabel.TextColor3 = Color3.new(1, 1, 1)
     TextLabel.Font = Enum.Font.Code
-    TextLabel.TextSize = TextSize
-    TextLabel.TextXAlignment = Enum.TextXAlignement = 2
-    TextLabel.TextYAlignment = Enum.TextYAlignement = 2
-    if TextSize <= 10 then
-        TextLabel.Scaled = true
-        TextLabel.TextSize = 20
-    end
+    TextLabel.TextSize = TextSize or 18
+    TextLabel.TextXAlignment = Enum.TextXAlignment.Center
+    TextLabel.TextYAlignment = Enum.TextYAlignment.Center
     TextLabel.Parent = Target
+    return TextLabel
 end
-
 
 return p
