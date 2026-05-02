@@ -58,10 +58,10 @@ function p:CreateBtn(Parent, Name, Pos, Size, Anchor, Func)
     NewBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     NewBtn.BorderColor3 = Color3.fromRGB(100, 255, 100)
     NewBtn.BorderSizePixel = 2
-    NewBtn.Text = Name or "Button"
+    NewBtn.Text = nil
     NewBtn.TextColor3 = Color3.new(1, 1, 1)
     NewBtn.TextScaled = true
-    NewBtn.Font = Enum.Font.Code   -- Font kiểu cũ, hacker feel
+    NewBtn.Font = Enum.Font.Code
     NewBtn.Parent = Parent
     
     if Func then
@@ -116,5 +116,20 @@ function p:CreateScroll(Parent, Name, Pos, Size, Anchor, AutoList)
 
     return NewScroll
 end
+
+-- ==================== TEXT LABEL ==========================
+function p.AddTextLabel(Target, Name, Text, TextSize)
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Name = Name
+    TextLabel.Text = Text
+    TextLabel.Font = Enum.Font.Code
+    TextLabel.TextSize = TextSize
+    if TextSize <= 10 then
+        TextLabel.Scaled = true
+        TextLabel.TextSize = 20
+    end
+    TextLabel.Parent = Target
+end
+
 
 return p
