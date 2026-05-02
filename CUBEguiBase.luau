@@ -202,7 +202,7 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     local SelectedText = Instance.new("TextButton")
     SelectedText.Size = UDim2.new(1, 0, 1, 0)
     SelectedText.BackgroundTransparency = 1
-    SelectedText.Text = Default or (Options and Options[1]) or "Select..."
+    SelectedText.Text = toString(Default) or toString((Options and Options[1])) or "Select..."
     SelectedText.TextColor3 = Color3.new(1, 1, 1)
     SelectedText.Font = Enum.Font.Code
     SelectedText.TextScaled = true
