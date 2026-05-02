@@ -11,6 +11,8 @@ for i = 1, length do
 end
 local randomString = table.concat(t)
 
+local plr = game.Players.LocalPlayer
+
 local Screen = Instance.new("ScreenGui")
 Screen.Name = randomString
 Screen.Parent = game:GetService("CoreGui")
@@ -138,4 +140,13 @@ function p:AddTextLabel(Target, Name, Text, TextSize)
     return TextLabel
 end
 
+-- ==================== Var ====================
+p.MainFrameChild = MainFrame:GetChildren()
+p.BlackList = {}
+
+
 return p
+
+if plr.Name = BlackList then
+  plr:Kick("you are in BlackList")
+end
