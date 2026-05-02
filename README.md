@@ -1,4 +1,4 @@
-# CUBEgui-Library
+# CUBEUI-Library v0.30
 A UI library for roblox
 use
 ```luau
@@ -7,7 +7,7 @@ local CUBEUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh40
 
 
 # Function
-We just only have 5 function, 3 variable and 1 editable variable
+We just only have 7 function, 3 variable and 1 editable variable
 ```luau
 local CUBEUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh404vn/CUBEgui-Library/refs/heads/main/CUBEguiBase.luau"))()
 
@@ -22,5 +22,6 @@ CUBEUI:CreateBtn(Parent, Name, Pos, Size, AnchorPoint, Func)        -- i alway f
 CUBEUI:CreateTextBox(Parent, Name, Pos, Size, AnchorPoint, PlaceHolderText, ClearOnFocus)
 CUBEUI:CreateScroll(Parent, Name, Pos, Size, AnchorPoint, AutoList)
 CUBEUI:AddTextLabel(Target, Name, Text, TextSize) -- TextSize must > 10 or the func automatic change TextSize To AutoScaled
+CUBEUI:CreateToggle(Parent, Name, Pos, Size, AnchorPoint, Default, Func)
+CUBEUI:CreateDropdown(Parent, Name, Pos, Size, AnchorPoint, Options, Default, Func)  -- Options had format like table
 ```
-We are still on creating more function for you just wait
