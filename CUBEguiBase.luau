@@ -1,9 +1,9 @@
 --[[
-      CUBE UI Library v0.35
+      CUBE UI Library v0.36
       Feel like C00lkid now?
 ]]--
 --[[ ##UPDATE LOG##
-      prefix the dropdown
+      prefix the dropdown(Again!!)
       nothings left
 ]]--
 
@@ -202,6 +202,7 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     DropdownFrame.BorderColor3 = Color3.fromRGB(100, 255, 100)
     DropdownFrame.BorderSizePixel = 2
     DropdownFrame.Parent = Parent
+    DropdownFrame.ClipsDescendants = true   -- quan trọng
 
     local SelectedText = Instance.new("TextButton")
     SelectedText.Size = UDim2.new(1, 0, 1, 0)
@@ -212,23 +213,45 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     SelectedText.TextScaled = true
     SelectedText.Parent = DropdownFrame
 
+    local DropdownContainer = Instance.new("Frame")
+    DropdownContainer.Name = "Container"
+    DropdownContainer.Size = UDim2.new(1, 0, 0, 150)   -- chiều cao tối đa hiển thị
+    DropdownContainer.Position = UDim2.new(0, 0, 1, 0)
+    DropdownContainer.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    DropdownContainer.BorderColor3 = Color3.fromRGB(100, 255, 100)
+    DropdownContainer.BorderSizePixel = 2
+    DropdownContainer.Visible = false
+    DropdownContainer.Parent = DropdownFrame
+
+    local Scroll = Instance.new("ScrollingFrame")
+    Scroll.Size = UDim2.new(1, 0, 1, 0)
+    Scroll.BackgroundTransparency = 1
+    Scroll.BorderSizePixel = 0
+    Scroll.ScrollBarThickness = 6
+    Scroll.ScrollBarImageColor3 = Color3.fromRGB(100, 255, 100)
+    Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    Scroll.CanvasSize = UDim2.new(0,0,0,0)
+    Scroll.Parent = DropdownContainer
+
+    local UiList = Instance.new("UIListLayout")
+    UiList.SortOrder = Enum.SortOrder.LayoutOrder
+    UiList.Padding = UDim.new(0, 2)
+    UiList.Parent = Scroll
+
     local isOpen = false
     local dropdownItems = {}
 
     SelectedText.MouseButton1Click:Connect(function()
         isOpen = not isOpen
-        for _, item in ipairs(dropdownItems) do
-            item.Visible = isOpen
-        end
+        DropdownContainer.Visible = isOpen
     end)
 
     if Options then
-        for i, option in ipairs(Options) do
+        for _, option in ipairs(Options) do
             local displayName = typeof(option) == "Instance" and option.Name or tostring(option)
             
             local Item = Instance.new("TextButton")
             Item.Size = UDim2.new(1, 0, 0, 30)
-            Item.Position = UDim2.new(0, 0, 0, 35 + (i-1)*30)
             Item.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
             Item.BorderColor3 = Color3.fromRGB(100, 255, 100)
             Item.BorderSizePixel = 1
@@ -236,15 +259,12 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
             Item.TextColor3 = Color3.new(1, 1, 1)
             Item.Font = Enum.Font.Code
             Item.TextScaled = true
-            Item.Visible = false
-            Item.Parent = DropdownFrame
+            Item.Parent = Scroll
 
             Item.MouseButton1Click:Connect(function()
                 SelectedText.Text = displayName
                 isOpen = false
-                for _, v in ipairs(dropdownItems) do 
-                    v.Visible = false 
-                end
+                DropdownContainer.Visible = false
                 if Func then
                     Func(option)
                 end
