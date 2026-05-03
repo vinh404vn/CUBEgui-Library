@@ -1,9 +1,10 @@
 --[[
-      CUBE UI Library v0.36
+      CUBE UI Library v0.37
       Feel like C00lkid now?
 ]]--
 --[[ ##UPDATE LOG##
-      prefix the dropdown(Again!!)
+      prefix the dropdown(Again!! n Again!!)
+      change the color of the togglebtn
       nothings left
 ]]--
 
@@ -168,8 +169,8 @@ function p:CreateToggle(Parent, Name, Pos, Size, Anchor, Default, Func)
     local ToggleBtn = Instance.new("TextButton")
     ToggleBtn.Size = UDim2.new(0.25, 0, 0.7, 0)
     ToggleBtn.Position = UDim2.new(0.72, 0, 0.15, 0)
-    ToggleBtn.BackgroundColor3 = Default and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(150, 150, 150)
-    ToggleBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+    ToggleBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    ToggleBtn.BorderColor3 = Default and Color3.fromRGB(100, 255, 100) or Color3.fromRGB(255, 0, 0)
     ToggleBtn.BorderSizePixel = 2
     ToggleBtn.Text = Default and "ON" or "OFF"
     ToggleBtn.TextColor3 = Color3.new(255, 255, 255)
@@ -202,7 +203,6 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     DropdownFrame.BorderColor3 = Color3.fromRGB(100, 255, 100)
     DropdownFrame.BorderSizePixel = 2
     DropdownFrame.Parent = Parent
-    DropdownFrame.ClipsDescendants = true   -- quan trọng
 
     local SelectedText = Instance.new("TextButton")
     SelectedText.Size = UDim2.new(1, 0, 1, 0)
@@ -213,18 +213,21 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     SelectedText.TextScaled = true
     SelectedText.Parent = DropdownFrame
 
+    -- Container cho menu dropdown
     local DropdownContainer = Instance.new("Frame")
-    DropdownContainer.Name = "Container"
-    DropdownContainer.Size = UDim2.new(1, 0, 0, 150)   -- chiều cao tối đa hiển thị
-    DropdownContainer.Position = UDim2.new(0, 0, 1, 0)
+    DropdownContainer.Name = "DropdownContainer"
+    DropdownContainer.Size = UDim2.new(1, 0, 0, 160)
+    DropdownContainer.Position = UDim2.new(0, 0, 1, 5)
     DropdownContainer.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     DropdownContainer.BorderColor3 = Color3.fromRGB(100, 255, 100)
     DropdownContainer.BorderSizePixel = 2
     DropdownContainer.Visible = false
+    DropdownContainer.ZIndex = 10
     DropdownContainer.Parent = DropdownFrame
 
     local Scroll = Instance.new("ScrollingFrame")
-    Scroll.Size = UDim2.new(1, 0, 1, 0)
+    Scroll.Size = UDim2.new(1, -4, 1, -4)
+    Scroll.Position = UDim2.new(0, 2, 0, 2)
     Scroll.BackgroundTransparency = 1
     Scroll.BorderSizePixel = 0
     Scroll.ScrollBarThickness = 6
@@ -239,7 +242,6 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     UiList.Parent = Scroll
 
     local isOpen = false
-    local dropdownItems = {}
 
     SelectedText.MouseButton1Click:Connect(function()
         isOpen = not isOpen
@@ -269,8 +271,6 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
                     Func(option)
                 end
             end)
-
-            table.insert(dropdownItems, Item)
         end
     end
 
