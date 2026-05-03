@@ -1,10 +1,9 @@
 --[[
-      CUBE UI Library v0.37
+      CUBE UI Library v0.38
       Feel like C00lkid now?
 ]]--
 --[[ ##UPDATE LOG##
-      prefix the dropdown(Again!! n Again!!)
-      change the color of the togglebtn
+      prefix the dropdown(Again!! n Again!! n AGAIN!!(i think is last))
       nothings left
 ]]--
 
@@ -234,6 +233,7 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     Scroll.ScrollBarImageColor3 = Color3.fromRGB(100, 255, 100)
     Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
     Scroll.CanvasSize = UDim2.new(0,0,0,0)
+    Scroll.ZIndex = 10
     Scroll.Parent = DropdownContainer
 
     local UiList = Instance.new("UIListLayout")
@@ -261,6 +261,7 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
             Item.TextColor3 = Color3.new(1, 1, 1)
             Item.Font = Enum.Font.Code
             Item.TextScaled = true
+            Item.ZIndex = 10
             Item.Parent = Scroll
 
             Item.MouseButton1Click:Connect(function()
