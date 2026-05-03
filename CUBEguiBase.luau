@@ -1,5 +1,5 @@
 --[[
-      CUBE UI Library v0.30
+      CUBE UI Library v0.34
       Feel like C00lkid now?
 ]]--
 
@@ -164,11 +164,11 @@ function p:CreateToggle(Parent, Name, Pos, Size, Anchor, Default, Func)
     local ToggleBtn = Instance.new("TextButton")
     ToggleBtn.Size = UDim2.new(0.25, 0, 0.7, 0)
     ToggleBtn.Position = UDim2.new(0.72, 0, 0.15, 0)
-    ToggleBtn.BackgroundColor3 = Default and Color3.fromRGB(0, 255, 100) or Color3.fromRGB(150, 150, 150)
-    ToggleBtn.BorderColor3 = Color3.fromRGB(100, 255, 100)
+    ToggleBtn.BackgroundColor3 = Default and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(150, 150, 150)
+    ToggleBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
     ToggleBtn.BorderSizePixel = 2
     ToggleBtn.Text = Default and "ON" or "OFF"
-    ToggleBtn.TextColor3 = Color3.new(0, 0, 0)
+    ToggleBtn.TextColor3 = Color3.new(255, 255, 255)
     ToggleBtn.Font = Enum.Font.Code
     ToggleBtn.TextScaled = true
     ToggleBtn.Parent = ToggleFrame
@@ -177,7 +177,7 @@ function p:CreateToggle(Parent, Name, Pos, Size, Anchor, Default, Func)
 
     ToggleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
-        ToggleBtn.BackgroundColor3 = toggled and Color3.fromRGB(0, 255, 100) or Color3.fromRGB(150, 150, 150)
+        ToggleBtn.BorderColor3 = toggled and Color3.fromRGB(100, 255, 100) or Color3.fromRGB(255, 0, 0)
         ToggleBtn.Text = toggled and "ON" or "OFF"
         if Func then
             Func(toggled)
