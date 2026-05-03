@@ -1,6 +1,10 @@
 --[[
-      CUBE UI Library v0.34
+      CUBE UI Library v0.35
       Feel like C00lkid now?
+]]--
+--[[ ##UPDATE LOG##
+      prefix the dropdown
+      nothings left
 ]]--
 
 local length = 10
@@ -202,7 +206,7 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     local SelectedText = Instance.new("TextButton")
     SelectedText.Size = UDim2.new(1, 0, 1, 0)
     SelectedText.BackgroundTransparency = 1
-    SelectedText.Text = toString(Default) or toString((Options and Options[1])) or "Select..."
+    SelectedText.Text = tostring(Default or (Options and Options[1]) or "Select...")
     SelectedText.TextColor3 = Color3.new(1, 1, 1)
     SelectedText.Font = Enum.Font.Code
     SelectedText.TextScaled = true
@@ -220,13 +224,15 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
 
     if Options then
         for i, option in ipairs(Options) do
+            local displayName = typeof(option) == "Instance" and option.Name or tostring(option)
+            
             local Item = Instance.new("TextButton")
             Item.Size = UDim2.new(1, 0, 0, 30)
             Item.Position = UDim2.new(0, 0, 0, 35 + (i-1)*30)
             Item.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
             Item.BorderColor3 = Color3.fromRGB(100, 255, 100)
             Item.BorderSizePixel = 1
-            Item.Text = option
+            Item.Text = displayName
             Item.TextColor3 = Color3.new(1, 1, 1)
             Item.Font = Enum.Font.Code
             Item.TextScaled = true
@@ -234,9 +240,11 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
             Item.Parent = DropdownFrame
 
             Item.MouseButton1Click:Connect(function()
-                SelectedText.Text = option
+                SelectedText.Text = displayName
                 isOpen = false
-                for _, v in ipairs(dropdownItems) do v.Visible = false end
+                for _, v in ipairs(dropdownItems) do 
+                    v.Visible = false 
+                end
                 if Func then
                     Func(option)
                 end
