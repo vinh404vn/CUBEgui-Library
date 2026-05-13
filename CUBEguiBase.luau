@@ -1,9 +1,9 @@
 --[[
-      CUBE UI Library v0.38
+      CUBE UI Library v0.39
       Feel like C00lkid now?
 ]]--
 --[[ ##UPDATE LOG##
-      prefix the dropdown(Again!! n Again!! n AGAIN!!(i think is last))
+      Add New Func and new editable var
       nothings left
 ]]--
 
@@ -179,6 +179,8 @@ function p:CreateToggle(Parent, Name, Pos, Size, Anchor, Default, Func)
 
     local toggled = Default or false
 
+    Func(toggled)
+
     ToggleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
         ToggleBtn.BorderColor3 = toggled and Color3.fromRGB(100, 255, 100) or Color3.fromRGB(255, 0, 0)
@@ -278,12 +280,49 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     return DropdownFrame
 end
 
+-- ==================== TOGGLE TEXT BUTTON ====================
+function p:CreateToggleTBtn(Parent, Name, Pos, Size, Anchor, TextT, TextF, Default, Func)
+    local TextBtn = Instance.new("TextButton")
+    TextBtn.Name = Name or "ToggleBtn"
+    TextBtn.Position = Pos or UDim2.new(0.5, 0, 0, 0)
+    TextBtn.Size = Size or UDim2.new(0.95, 0, 0, 35)
+    TextBtn.AnchorPoint = Anchor or Vector2.new(0.5, 0)
+    TextBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    TextBtn.BorderColor3 = Color3.fromRGB(100, 255, 100)
+    TextBtn.BorderSizePixel = 2
+    TextBtn.Font = Enum.Font.Code
+    TextBtn.TextScaled = true
+    TextBtn.Parent = Parent
+
+    local Value = Default or false
+    TextBtn.Text = Value and (TextT or "ON") or (TextF or "OFF")
+
+    if Func then
+        Func(Value)
+    end
+
+    TextBtn.MouseButton1Click:Connect(function()
+        Value = not Value
+        TextBtn.Text = Value and (TextT or "ON") or (TextF or "OFF")
+        if Func then
+            Func(Value)
+        end
+    end)
+
+    return TextBtn
+end
+
 -- ==================== Variables ====================
 p.MainFrameChild = MainFrame:GetChildren()
 p.BlackList = {}
+p.BlackListID = {}
 
 if table.find(p.BlackList, plr.Name) then
     plr:Kick("You are in BlackList")
+end
+
+if table.find(p.BlackListID, plr.UserID) then
+    plr:Kick("Your ID are in BlackList")
 end
 
 return p
