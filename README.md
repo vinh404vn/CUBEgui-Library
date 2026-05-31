@@ -25,5 +25,9 @@ CUBEUI:CreateScroll(Parent, Name, Pos, Size, AnchorPoint, AutoList)
 CUBEUI:AddTextLabel(Target, Name, Text, TextSize) -- TextSize must > 10 or the func automatic change TextSize To AutoScaled
 CUBEUI:CreateToggle(Parent, Name, Pos, Size, AnchorPoint, Default, Func)
 CUBEUI:CreateDropdown(Parent, Name, Pos, Size, AnchorPoint, Options, Default, Func)  -- Options had format like table
+-- child script of Dropdown(make sure func of dropdown need to in an variable)
+local Dropdown = CUBEUI:CreateDropdown(--some var it requires--)
+Dropdown.Refresh(--table of options--)
+
 CUBEUI:CreateToggleTBtn(Parent, Name, Pos, Size, Anchor, TextTrue, TextFalse, Default, Func) -- a toggle btn with text on it
 ```
