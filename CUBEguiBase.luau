@@ -214,7 +214,6 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     SelectedText.TextScaled = true
     SelectedText.Parent = DropdownFrame
 
-    -- Container cho menu dropdown
     local DropdownContainer = Instance.new("Frame")
     DropdownContainer.Name = "DropdownContainer"
     DropdownContainer.Size = UDim2.new(1, 0, 0, 160)
@@ -244,40 +243,60 @@ function p:CreateDropdown(Parent, Name, Pos, Size, Anchor, Options, Default, Fun
     UiList.Parent = Scroll
 
     local isOpen = false
+    local dropdownItems = {}
+
+    local function RefreshDropdown(newOptions)
+        -- Xóa item cũ
+        for _, item in ipairs(dropdownItems) do
+            item:Destroy()
+        end
+        dropdownItems = {}
+
+        if newOptions then
+            for _, option in ipairs(newOptions) do
+                local displayName = typeof(option) == "Instance" and option.Name or tostring(option)
+                
+                local Item = Instance.new("TextButton")
+                Item.Size = UDim2.new(1, 0, 0, 30)
+                Item.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+                Item.BorderColor3 = Color3.fromRGB(100, 255, 100)
+                Item.BorderSizePixel = 1
+                Item.Text = displayName
+                Item.TextColor3 = Color3.new(1, 1, 1)
+                Item.Font = Enum.Font.Code
+                Item.TextScaled = true
+                Item.ZIndex = 10
+                Item.Parent = Scroll
+
+                Item.MouseButton1Click:Connect(function()
+                    SelectedText.Text = displayName
+                    isOpen = false
+                    DropdownContainer.Visible = false
+                    if Func then
+                        Func(option)
+                    end
+                end)
+
+                table.insert(dropdownItems, Item)
+            end
+        end
+    end
 
     SelectedText.MouseButton1Click:Connect(function()
         isOpen = not isOpen
         DropdownContainer.Visible = isOpen
     end)
 
-    if Options then
-        for _, option in ipairs(Options) do
-            local displayName = typeof(option) == "Instance" and option.Name or tostring(option)
-            
-            local Item = Instance.new("TextButton")
-            Item.Size = UDim2.new(1, 0, 0, 30)
-            Item.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            Item.BorderColor3 = Color3.fromRGB(100, 255, 100)
-            Item.BorderSizePixel = 1
-            Item.Text = displayName
-            Item.TextColor3 = Color3.new(1, 1, 1)
-            Item.Font = Enum.Font.Code
-            Item.TextScaled = true
-            Item.ZIndex = 10
-            Item.Parent = Scroll
+    -- Refresh ban đầu
+    RefreshDropdown(Options)
 
-            Item.MouseButton1Click:Connect(function()
-                SelectedText.Text = displayName
-                isOpen = false
-                DropdownContainer.Visible = false
-                if Func then
-                    Func(option)
-                end
-            end)
-        end
-    end
+    -- Trả về thêm hàm Refresh để dùng sau
+    local DropdownObject = {
+        Frame = DropdownFrame,
+        Refresh = RefreshDropdown
+    }
 
-    return DropdownFrame
+    return DropdownObject
 end
 
 -- ==================== TOGGLE TEXT BUTTON ====================
