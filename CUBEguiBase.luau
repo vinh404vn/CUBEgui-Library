@@ -340,7 +340,7 @@ if table.find(p.BlackList, plr.Name) then
     plr:Kick("You are in BlackList")
 end
 
-if table.find(p.BlackListID, plr.UserID) then
+if table.find(p.BlackListID, plr.UserId) then
     plr:Kick("Your ID are in BlackList")
 end
 
